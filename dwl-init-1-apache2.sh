@@ -1,3 +1,3 @@
 #!/bin/sh
-service apache2 start
+exec apache2 -D FOREGROUND
 echo "apache2 Initialized";
