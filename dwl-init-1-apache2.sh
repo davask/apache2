@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 service apache2 start
-/bin/bash
+echo "apache2 Initialized";
