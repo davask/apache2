@@ -32,3 +32,5 @@ RUN a2enmod cgi
 EXPOSE 80
 
 COPY ./dwl-init-1-apache2.sh /tmp/dwl-init-1-apache2.sh
+
+VOLUME /etc/apache2/sites-enabled
