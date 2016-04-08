@@ -23,14 +23,18 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 
 RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 
+RUN chown -R ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /tmp/uploads
+
 # Configure apache
 RUN a2enmod rewrite
 RUN a2enmod expires
 RUN a2enmod headers
 RUN a2enmod cgi
 
+USER ${APACHE_RUN_USER}
+
+VOLUME /etc/apache2/sites-enabled
+
 EXPOSE 80
 
 COPY ./dwl-init-1-apache2.sh /tmp/dwl-init-1-apache2.sh
-
-VOLUME /etc/apache2/sites-enabled
