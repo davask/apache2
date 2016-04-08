@@ -23,7 +23,7 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 
 RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 
-RUN chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP /tmp/uploads
+RUN chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP /tmp
 
 # Configure apache
 RUN a2enmod rewrite
