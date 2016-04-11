@@ -18,8 +18,6 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 
 RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 
-RUN chown -R $DWL_USER_NAME:$APACHE_RUN_GROUP $DWL_USER_DIR_TMP
-
 # Configure apache
 RUN a2enmod rewrite
 RUN a2enmod expires
