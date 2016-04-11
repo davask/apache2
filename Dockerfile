@@ -3,13 +3,8 @@ MAINTAINER davask <contact@davaskweblimited.com>
 
 LABEL dwl.server.http="apache2"
 
-# disable interactive functions
-ENV DEBIAN_FRONTEND noninteractive
-
 RUN apt-get update
-
 RUN apt-get install -y apache2
-
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/fqdn.conf && a2enconf fqdn
@@ -23,7 +18,7 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 
 RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 
-RUN chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP /tmp
+RUN chown -R $DWL_USER_NAME:$APACHE_RUN_GROUP $DWL_USER_DIR_TMP
 
 # Configure apache
 RUN a2enmod rewrite
@@ -37,4 +32,7 @@ VOLUME /etc/apache2/sites-enabled
 
 EXPOSE 80
 
-COPY ./dwl-init-1-apache2.sh /tmp/dwl-init-1-apache2.sh
+# Copy instantiation specific file
+COPY ./apache2.sh $DWL_INIT_DIR/$DWL_INIT_COUNT-apache2.sh
+# update counter for next container
+RUN DWL_INIT_COUNT=$(($DWL_INIT_COUNT+1))
