@@ -1,4 +1,4 @@
-FROM davask/d-ubuntu:14.04
+FROM davask/d-base:latest
 MAINTAINER davask <contact@davaskweblimited.com>
 
 LABEL dwl.server.http="apache2"
