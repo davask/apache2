@@ -31,4 +31,4 @@ EXPOSE 80
 # Copy instantiation specific file
 COPY ./apache2.sh $DWL_INIT_DIR/$DWL_INIT_COUNT-apache2.sh
 # update counter for next container
-RUN DWL_INIT_COUNT=$(($DWL_INIT_COUNT+1))
+ENV DWL_INIT_COUNT $(($DWL_INIT_COUNT+1))
