@@ -24,8 +24,6 @@ RUN a2enmod expires
 RUN a2enmod headers
 RUN a2enmod cgi
 
-RUN rm -rdf /var/www/html
-
 VOLUME /etc/apache2/sites-enabled
 
 EXPOSE 80
