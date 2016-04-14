@@ -28,7 +28,8 @@ VOLUME /etc/apache2/sites-enabled
 
 EXPOSE 80
 
+# Declare instantiation counter
+ENV DWL_INIT_COUNT 1
+
 # Copy instantiation specific file
 COPY ./apache2.sh $DWL_INIT_DIR/$DWL_INIT_COUNT-apache2.sh
-# update counter for next container
-ENV DWL_INIT_COUNT $(($DWL_INIT_COUNT+1))
