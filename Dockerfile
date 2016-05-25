@@ -24,6 +24,9 @@ RUN a2enmod expires
 RUN a2enmod headers
 RUN a2enmod cgi
 
+# proxy protection
+RUN a2enmod remoteip
+
 VOLUME /etc/apache2/sites-enabled
 
 EXPOSE 80
