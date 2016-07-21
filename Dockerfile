@@ -12,7 +12,7 @@ RUN rm -rf /var/lib/apt/lists/*
 ENV DWL_INIT app
 ENV DWL_FQDN davaskweblimited.com
 
-RUN echo "ServerName $DWL_FQDN" | tee /etc/apache2/conf-available/fqdn.conf
+RUN echo "ServerName $DWL_FQDN" >> /etc/apache2/conf-available/fqdn.conf
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
@@ -37,11 +37,11 @@ RUN a2enmod cgi
 # proxy protection
 RUN a2enmod remoteip
 
-VOLUME /etc/apache2/sites-available
+COPY ./sites-available /etc/apache2/sites-available
+COPY ./html /var/www/html
 
 EXPOSE 80
 EXPOSE 443
-EXPOSE 22
 
 # Declare instantiation counter
 ENV DWL_INIT_COUNT 1
