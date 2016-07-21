@@ -40,6 +40,8 @@ RUN a2enmod remoteip
 VOLUME /etc/apache2/sites-available
 
 EXPOSE 80
+EXPOSE 443
+EXPOSE 22
 
 # Declare instantiation counter
 ENV DWL_INIT_COUNT 1
