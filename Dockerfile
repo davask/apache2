@@ -12,7 +12,7 @@ RUN rm -rf /var/lib/apt/lists/*
 ENV DWL_INIT app
 ENV DWL_FQDN davaskweblimited.com
 
-RUN echo "ServerName $DWL_FQDN" >> /etc/apache2/conf-available/fqdn.conf
+RUN echo "$DWL_FQDN" > /etc/hostname
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
@@ -24,9 +24,6 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_LOG_DIR $DWL_USER_DIR_LOG/apache2
 
 RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
-
-# Configure fqdn
-RUN a2enconf fqdn
 
 # Configure apache
 RUN a2enmod rewrite
