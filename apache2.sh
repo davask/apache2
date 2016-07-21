@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "> disable all sites-enabled";
-find /etc/apache2/sites-enabled/ -type l -exec rm -i "{}" \;
+find /etc/apache2/sites-enabled/ -type l -exec rm -rdf "{}" \;
 
 echo "> enabling all sites-available";
 for site in `ls /etc/apache2/sites-available`;
