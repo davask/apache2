@@ -34,8 +34,6 @@ RUN a2enmod remoteip
 COPY ./sites-available /etc/apache2/sites-available
 COPY ./html /var/www/html
 
-EXPOSE 80
-
 # Declare instantiation counter
 ENV DWL_INIT_COUNT 1
 
