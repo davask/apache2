@@ -21,7 +21,3 @@ Define dirname to receive app files
 Define instantiation type
 > DWL_INIT app
 
-- - -
-
-Define APACHE FDQN
-> DWL_FQDN davaskweblimited.com
