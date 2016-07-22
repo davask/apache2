@@ -10,9 +10,6 @@ RUN rm -rf /var/lib/apt/lists/*
 
 # Declare instantiation type
 ENV DWL_INIT app
-ENV DWL_FQDN davaskweblimited.com
-
-RUN echo "$DWL_FQDN" > /etc/hostname
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
