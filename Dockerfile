@@ -33,10 +33,10 @@ RUN a2enmod remoteip
 
 COPY ./sites-available /etc/apache2/sites-available
 
-USER $DWL_USER_NAME
 COPY ./html /var/www/html
 
-USER root
+VOLUME /var/www/html
+VOLUME /etc/apache2/sites-available
 
 # Declare instantiation counter
 ENV DWL_INIT_COUNT 1
