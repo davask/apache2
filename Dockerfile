@@ -8,6 +8,8 @@ RUN apt-get install -y apache2
 RUN apt-get install -y apache2-utils
 RUN rm -rf /var/lib/apt/lists/*
 
+ENV DWL_KEEP_RUNNING true
+
 # Declare instantiation type
 ENV DWL_INIT app
 
@@ -34,9 +36,6 @@ RUN a2enmod remoteip
 COPY ./sites-available /etc/apache2/sites-available
 
 COPY ./html /var/www/html
-
-VOLUME /var/www/html
-VOLUME /etc/apache2/sites-available
 
 # Declare instantiation counter
 ENV DWL_INIT_COUNT 1

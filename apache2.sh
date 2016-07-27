@@ -9,5 +9,9 @@ do
     a2ensite `echo ${site} | sed 's/\.conf$//'`;
 done;
 
+if [ "${DWL_INIT}" = "wordpress" ]; then
+    chown ${DWL_USER_NAME}:www-data -R /home/${DWL_USER_NAME}/files/wp-content
+fi;
+
 service apache2 start
 echo "apache2 Initialized";

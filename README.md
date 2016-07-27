@@ -21,3 +21,14 @@ Define dirname to receive app files
 Define instantiation type
 > DWL_INIT app
 
+Application type Configuration
+
+php5 app by default
+> DWL_INIT=app
+
+Available conf
+Wordpress
+> DWL_INIT=wordpress
+
+Symfony 2
+> DWL_INIT=symfony2
