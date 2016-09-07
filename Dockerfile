@@ -5,6 +5,7 @@ LABEL dwl.server.http="apache2"
 
 RUN apt-get update
 RUN apt-get install -y apache2
+RUN apt-get install -y apache2-utils
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/fqdn.conf && a2enconf fqdn
