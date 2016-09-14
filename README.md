@@ -1,34 +1,14 @@
-# apache2
-dockerfile base for apache2
+# dockerfile
 
-Default ENV values
+## Default ENV values
 
 Define Default LANG LOCAL
 > DWL_LOCAL en_US.UTF-8
 
-- - -
-
-Force container to keep running
-> DWL_KEEP_RUNNING false
-
-Define username:passwd for ftp access
+Define username:passwd for ssh access
 > DWL_USER_NAME dwl
 > DWL_USER_PASSWD dwl
 
-Define dirname to receive app files
-> DWL_APP_DIR files
+## LABEL
 
-Define instantiation type
-> DWL_INIT app
-
-Application type Configuration
-
-php5 app by default
-> DWL_INIT=app
-
-Available conf
-Wordpress
-> DWL_INIT=wordpress
-
-Symfony 2
-> DWL_INIT=symfony2
+>dwl.server.os="ubuntu 16.04"
