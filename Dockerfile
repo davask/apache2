@@ -1,4 +1,4 @@
-FROM davask/d-ubuntu:14.04
+FROM davask/d-ubuntu:16.04
 MAINTAINER davask <contact@davaskweblimited.com>
 USER root
 LABEL dwl.server.http="apache 2.4"

@@ -12,5 +12,5 @@ Define username:passwd for ssh access
 ## LABEL
 
 > dwl.server.http="apache 2.4"
-> dwl.server.os="ubuntu 14.04"
+> dwl.server.os="ubuntu 16.04"
 
