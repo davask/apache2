@@ -32,7 +32,6 @@ RUN /bin/bash -c 'a2enmod cgi'
 RUN /bin/bash -c 'a2enmod remoteip'
 
 EXPOSE 80
-EXPOSE 443
 
 COPY ./var/www/html /var/www/html
 COPY ./etc/apache2/sites-enabled /etc/apache2/sites-enabled
