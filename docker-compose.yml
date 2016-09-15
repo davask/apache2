@@ -1,4 +1,4 @@
-d-ubuntu:
+d-apache2:
   ports:
   - 65500:22/tcp
   - 65501:80/tcp
