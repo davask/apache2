@@ -34,5 +34,8 @@ RUN /bin/bash -c 'a2enmod remoteip'
 EXPOSE 80
 
 COPY ./var/www/html /var/www/html
-COPY ./etc/apache2/sites-enabled /etc/apache2/sites-enabled
+
+COPY ./etc/apache2/sites-available /etc/apache2/sites-available
+RUN /bin/bash -c 'a2ensite virtualhost'
+
 COPY ./tmp/dwl/init.sh /tmp/dwl/init.sh
