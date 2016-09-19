@@ -3,11 +3,15 @@ d-apache2:
   - 65500:22/tcp
   - 65501:80/tcp
   environment:
-    DWL_USER_NAME: dwl
-    DWL_USER_PASSWD: dwl
+    DWL_LOCAL: en_US.UTF-8
+    DWL_USER_NAME: username
+    DWL_USER_PASSWD: secret
+    DWL_SSH_ACCESS: false
   labels:
     io.rancher.container.pull_image: always
     io.rancher.scheduler.affinity:host_label: dwl=dwlComPrivate
   tty: true
   image: davask/d-apache2:2.4-u14.04
+  volumes:
+  - /path/to/files:/home/username/files
   stdin_open: true
