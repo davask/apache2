@@ -13,5 +13,6 @@ d-apache2:
   tty: true
   image: davask/d-apache2:2.4-u14.04
   volumes:
+  - /path/to/proxy/sites-available:/etc/apache2/sites-available
   - /path/to/files:/home/username/files
   stdin_open: true
