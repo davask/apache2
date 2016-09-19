@@ -28,13 +28,6 @@ echo ">> Ubuntu initialized";
 
 echo ">> Base initialized";
 
-for site2dis in `find /etc/apache2/sites-enabled -type f -name "*.conf" | awk -F'[/]' '{print $5}' | awk -F'[\.]' '{print $1}'`; do
-    a2dissite ${site2dis};
-done;
-for site2en in `find /etc/apache2/sites-available -type f -name "*.conf" | awk -F'[/]' '{print $5}' | awk -F'[\.]' '{print $1}'`; do
-    a2ensite ${site2en};
-done;
-
 if [ -d ${DWL_USER_HOME}/files ]; then
     rm -rdf /var/www/html;
     ln -sf ${DWL_USER_HOME}/files /var/www/html;

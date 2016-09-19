@@ -21,5 +21,5 @@ EXPOSE 80
 
 COPY ./var/www/html /var/www/html
 COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
-COPY ./etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY ./etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 COPY ./tmp/dwl/init.sh /tmp/dwl/init.sh
