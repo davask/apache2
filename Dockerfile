@@ -13,7 +13,6 @@ RUN /bin/bash -c 'a2enmod rewrite'
 RUN /bin/bash -c 'a2enmod expires'
 RUN /bin/bash -c 'a2enmod headers'
 RUN /bin/bash -c 'a2enmod cgi'
-
 # proxy protection
 RUN /bin/bash -c 'a2enmod remoteip'
 
@@ -25,7 +24,10 @@ RUN /bin/bash -c 'if [ -f /etc/apache2/sites-available/000-default.conf ]; then 
 fi;'
 
 EXPOSE 80
+EXPOSE 443
 
 COPY ./var/www/html /var/www/html
 COPY ./etc/apache2/sites-enabled/virtualhost.conf /etc/apache2/sites-enabled/virtualhost.conf
+COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
+COPY ./tmp/dwl/apache2.sh /tmp/dwl/apache2.sh
 COPY ./tmp/dwl/init.sh /tmp/dwl/init.sh
