@@ -30,3 +30,5 @@ COPY ./etc/apache2/sites-enabled/virtualhost.conf /etc/apache2/sites-enabled/vir
 COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
 COPY ./tmp/dwl/apache2.sh /tmp/dwl/apache2.sh
 COPY ./tmp/dwl/init.sh /tmp/dwl/init.sh
+
+ONBUILD RUN /bin/bash -c 'rm /etc/apache2/sites-enabled/virtualhost.conf'
