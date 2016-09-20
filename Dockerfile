@@ -17,10 +17,15 @@ RUN /bin/bash -c 'a2enmod cgi'
 # proxy protection
 RUN /bin/bash -c 'a2enmod remoteip'
 
+RUN /bin/bash -c 'if [ -f /etc/apache2/sites-enabled/000-default.conf ]; then \
+    a2dissite 000-default; \
+fi;'
+RUN /bin/bash -c 'if [ -f /etc/apache2/sites-available/000-default.conf ]; then \
+    rm /etc/apache2/sites-available/000-default.conf; \
+fi;'
+
 EXPOSE 80
-EXPOSE 443
 
 COPY ./var/www/html /var/www/html
-COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
-COPY ./etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY ./etc/apache2/sites-enabled/virtualhost.conf /etc/apache2/sites-enabled/virtualhost.conf
 COPY ./tmp/dwl/init.sh /tmp/dwl/init.sh
