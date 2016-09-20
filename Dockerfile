@@ -24,7 +24,6 @@ RUN /bin/bash -c 'if [ -f /etc/apache2/sites-available/000-default.conf ]; then 
 fi;'
 
 EXPOSE 80
-EXPOSE 443
 
 COPY ./var/www/html /var/www/html
 COPY ./etc/apache2/sites-enabled/virtualhost.conf /etc/apache2/sites-enabled/virtualhost.conf

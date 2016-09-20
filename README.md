@@ -4,7 +4,6 @@ see [FROM IMAGE README.md](https://github.com/davask/d-base)
 
 ## Open port
 - 80
-- 443
 
 ### Apache2 activation
 
