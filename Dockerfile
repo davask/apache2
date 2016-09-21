@@ -2,6 +2,8 @@ FROM davask/d-base:u14.04
 MAINTAINER davask <docker@davaskweblimited.com>
 LABEL dwl.server.http="apache 2.4"
 
+ENV DWL_USER_DNS docker.davaskweblimited.com
+
 # Update packages
 RUN /bin/bash -c 'apt-get update'
 RUN /bin/bash -c 'apt-get install -y apache2'
@@ -16,23 +18,14 @@ RUN /bin/bash -c 'a2enmod cgi'
 # proxy protection
 RUN /bin/bash -c 'a2enmod remoteip'
 
-RUN /bin/bash -c 'if [ -f /etc/apache2/sites-enabled/000-default.conf ]; then \
-    a2dissite 000-default; \
-fi;'
-RUN /bin/bash -c 'if [ -f /etc/apache2/sites-available/000-default.conf ]; then \
-    rm /etc/apache2/sites-available/000-default.conf; \
-fi;'
+RUN /bin/bash -c 'for conf in `find /etc/apache2/sites-enabled/ -type l`; do rm ${conf}; done;'
+RUN /bin/bash -c 'for conf in `find /etc/apache2/sites-available/ -type f`; do rm ${conf}; done;'
+# Configure apache virtualhost.conf
+COPY ./etc/apache2/sites-available/virtualhost.conf /etc/apache2/sites-available/${DWL_USER_DNS}.conf
 
 EXPOSE 80
 
 COPY ./var/www/html /var/www/html
-
-# Configure apache virtualhost.conf
-COPY ./etc/apache2/sites-available /etc/apache2/sites-available
-RUN /bin/bash -c 'a2ensite virtualhost'
-ONBUILD RUN /bin/bash -c 'a2dissite virtualhost'
-ONBUILD RUN /bin/bash -c 'rm /etc/apache2/sites-available/virtualhost.conf'
-
 COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
 COPY ./tmp/dwl/apache2.sh /tmp/dwl/apache2.sh
 COPY ./tmp/dwl/init.sh /tmp/dwl/init.sh
