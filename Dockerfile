@@ -26,9 +26,13 @@ fi;'
 EXPOSE 80
 
 COPY ./var/www/html /var/www/html
-COPY ./etc/apache2/sites-enabled/virtualhost.conf /etc/apache2/sites-enabled/virtualhost.conf
+
+# Configure apache virtualhost.conf
+COPY ./etc/apache2/sites-available /etc/apache2/sites-available
+RUN /bin/bash -c 'a2ensite virtualhost'
+ONBUILD RUN /bin/bash -c 'a2dissite virtualhost'
+ONBUILD RUN /bin/bash -c 'rm /etc/apache2/sites-available/virtualhost.conf'
+
 COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
 COPY ./tmp/dwl/apache2.sh /tmp/dwl/apache2.sh
 COPY ./tmp/dwl/init.sh /tmp/dwl/init.sh
-
-ONBUILD RUN /bin/bash -c 'rm /etc/apache2/sites-enabled/virtualhost.conf'
