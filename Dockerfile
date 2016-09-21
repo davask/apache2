@@ -25,9 +25,12 @@ RUN /bin/bash -c 'a2enmod cgi'
 # proxy protection
 RUN /bin/bash -c 'a2enmod remoteip'
 
+RUN /bin/bash -c 'rm -f /etc/apache2/sites-enabled/000-default.conf &>> null'
+RUN /bin/bash -c 'rm -f /etc/apache2/sites-available/000-default.conf &>> null'
+
 # Configure apache virtualhost.conf
 COPY ./tmp/dwl/virtualhost.conf /tmp/dwl/virtualhost.conf
-RUN /bin/bash -c 'cp -f /tmp/dwl/virtualhost.conf /etc/apache2/sites-available/${DWL_USER_DNS}.conf'
+RUN /bin/bash -c 'cp -rdf /tmp/dwl/virtualhost.conf /etc/apache2/sites-available/${DWL_USER_DNS}.conf'
 
 EXPOSE 80
 
