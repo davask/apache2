@@ -1,10 +1,8 @@
-DWL_AVAILABLE_SITE=`find /etc/apache2/sites-available/ -type f`;
-if [ `echo ${DWL_AVAILABLE_SITE} | wc -l` > 0 ]; then
-    for conf in ${DWL_AVAILABLE_SITE}; do
-        conf=${conf/\/etc\/apache2\/sites-available\//};
-        a2ensite ${conf/\.conf/};
-    done;
-fi
+for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
+    DWL_USER_DNS=`echo ${conf} | awk -F '[/]' '{print $5}' | sed "s|\.conf||g"`;
+    echo ${DWL_USER_DNS};
+    a2ensite ${DWL_USER_DNS};
+done;
 
 if [ -d ${DWL_USER_HOME}/files ]; then
     rm -rdf /var/www/html;
