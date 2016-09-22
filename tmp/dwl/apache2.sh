@@ -3,8 +3,8 @@ for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
     a2ensite ${DWL_USER_DNS};
 done;
 
-if [ -d ${DWL_USER_HOME}/files ]; then
+if [ -d /home/${DWL_USER_NAME}/files ]; then
     rm -rdf /var/www/html;
-    ln -sf ${DWL_USER_HOME}/files /var/www/html;
+    ln -sf /home/${DWL_USER_NAME}/files /var/www/html;
 fi
 service apache2 start;
