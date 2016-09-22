@@ -28,12 +28,13 @@ RUN /bin/bash -c 'rm -f /etc/apache2/sites-enabled/000-default.conf &>> null'
 RUN /bin/bash -c 'rm -f /etc/apache2/sites-available/000-default.conf &>> null'
 
 # Configure apache virtualhost.conf
-COPY ./tmp/dwl/virtualhost.conf /tmp/dwl/virtualhost.conf
-RUN /bin/bash -c 'cp -rdf /tmp/dwl/virtualhost.conf /etc/apache2/sites-available/docker.davaskweblimited.com.conf'
+COPY ./tmp/dwl/docker.davaskweblimited.com.conf.dwl /tmp/dwl/docker.davaskweblimited.com.conf.dwl
+RUN /bin/bash -c 'cp -rdf /tmp/dwl/docker.davaskweblimited.com.conf.dwl /etc/apache2/sites-available/docker.davaskweblimited.com.conf.dwl'
 
 EXPOSE 80
 
 COPY ./var/www/html /var/www/html
 COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
+COPY ./tmp/dwl/activateconf.sh /tmp/dwl/activateconf.sh
 COPY ./tmp/dwl/apache2.sh /tmp/dwl/apache2.sh
 COPY ./tmp/dwl/init.sh /tmp/dwl/init.sh

@@ -1,6 +1,5 @@
 for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
     DWL_USER_DNS=`echo ${conf} | awk -F '[/]' '{print $5}' | sed "s|\.conf||g"`;
-    echo ${DWL_USER_DNS};
     a2ensite ${DWL_USER_DNS};
 done;
 
