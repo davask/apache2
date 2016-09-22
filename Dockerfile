@@ -7,9 +7,8 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR /var/web/log/apache2
-ENV APACHE_RUN_DIR=/var/run/apache2
-ENV DWL_USER_DNS docker.davaskweblimited.com
+ENV APACHE_LOG_DIR /var/log/apache2
+ENV APACHE_RUN_DIR /var/run/apache2
 
 # Update packages
 RUN /bin/bash -c 'apt-get update'
@@ -30,7 +29,7 @@ RUN /bin/bash -c 'rm -f /etc/apache2/sites-available/000-default.conf &>> null'
 
 # Configure apache virtualhost.conf
 COPY ./tmp/dwl/virtualhost.conf /tmp/dwl/virtualhost.conf
-RUN /bin/bash -c 'cp -rdf /tmp/dwl/virtualhost.conf /etc/apache2/sites-available/${DWL_USER_DNS}.conf'
+RUN /bin/bash -c 'cp -rdf /tmp/dwl/virtualhost.conf /etc/apache2/sites-available/docker.davaskweblimited.com.conf'
 
 EXPOSE 80
 
