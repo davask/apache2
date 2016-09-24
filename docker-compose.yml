@@ -1,4 +1,4 @@
-d-apache2:
+d-apache:
   ports:
   - 65503:22/tcp
   - 65504:80/tcp
@@ -11,7 +11,7 @@ d-apache2:
     io.rancher.scheduler.affinity:host_label: dwl=dwlComPrivate
   tty: true
   hostname: apache2.davaskweblimited.com
-  image: davask/d-apache2:2.4-u14.04
+  image: davask/d-apache:2.4-u12.04
   volumes:
   - /home/dwl/projects/factory/docker-dev/files:/home/dwl/files
   - /home/dwl/projects/factory/docker-dev/sites-available:/etc/apache2/sites-available
@@ -30,7 +30,7 @@ d-base:
     io.rancher.scheduler.affinity:host_label: dwl=dwlComPrivate
   tty: true
   hostname: base.davaskweblimited.com
-  image: davask/d-base:u14.04
+  image: davask/d-base:u12.04
   volumes:
   - /home/dwl/projects/factory/docker-dev:/home/dwl
   stdin_open: true

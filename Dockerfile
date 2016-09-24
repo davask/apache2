@@ -1,4 +1,4 @@
-FROM davask/d-base:u14.04
+FROM davask/d-base:u12.04
 MAINTAINER davask <docker@davaskweblimited.com>
 LABEL dwl.server.http="apache 2.4"
 
