@@ -11,6 +11,7 @@ ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_RUN_DIR /var/run/apache2
 
 # Update packages
+# RUN /bin/bash -c 'add-apt-repository ppa:ondrej/apache2'
 RUN /bin/bash -c 'apt-get update'
 RUN /bin/bash -c 'apt-get install -y apache2'
 RUN /bin/bash -c 'apt-get install -y apache2-utils'
@@ -21,8 +22,9 @@ RUN /bin/bash -c 'a2enmod rewrite'
 RUN /bin/bash -c 'a2enmod expires'
 RUN /bin/bash -c 'a2enmod headers'
 RUN /bin/bash -c 'a2enmod cgi'
+# RUN /bin/bash -c 'apache2 -v'
 # proxy protection
-RUN /bin/bash -c 'a2enmod remoteip'
+# RUN /bin/bash -c 'a2enmod remoteip'
 
 RUN /bin/bash -c 'rm -f /etc/apache2/sites-enabled/000-default.conf &>> null'
 RUN /bin/bash -c 'rm -f /etc/apache2/sites-available/000-default.conf &>> null'
