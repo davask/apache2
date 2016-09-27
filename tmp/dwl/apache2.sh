@@ -7,4 +7,6 @@ if [ -d /home/${DWL_USER_NAME}/files ]; then
     rm -rdf /var/www/html;
     ln -sf /home/${DWL_USER_NAME}/files /var/www/html;
 fi
+chown -R ${DWL_USER_NAME} /etc/apache2/sites-available/*;
+
 service apache2 start;
