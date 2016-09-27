@@ -33,6 +33,8 @@ RUN /bin/bash -c 'cp -rdf /tmp/dwl/docker.davaskweblimited.com.conf.dwl /etc/apa
 
 EXPOSE 80
 
+WORKDIR /var/www/html
+
 COPY ./var/www/html /var/www/html
 COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
 COPY ./tmp/dwl/activateconf.sh /tmp/dwl/activateconf.sh
