@@ -1,15 +1,18 @@
-d-apache2:
+d-apache:
   ports:
-  - 65500:22/tcp
-  - 65501:80/tcp
+  - 65503:22/tcp
+  - 65504:80/tcp
   environment:
-    DWL_LOCAL: en_US.UTF-8
+    DWL_SSH_ACCESS: 'true'
     DWL_USER_NAME: username
     DWL_USER_PASSWD: secret
-    DWL_SSH_ACCESS: true
+    DWL_USER_ID: '1000'
   labels:
-    io.rancher.container.pull_image: always
     io.rancher.scheduler.affinity:host_label: dwl=dwlComPrivate
   tty: true
-  image: davask/d-apache2:2.4-u16.04
+  hostname: apache.davaskweblimited.com
+  image: davask/d-apache:2.4-u16.04
+  volumes:
+  - /path/to/files:/home/username/files
+  - /path/to/sites-available:/etc/apache2/sites-available
   stdin_open: true

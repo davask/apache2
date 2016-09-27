@@ -1,16 +1,18 @@
 # dockerfile
 
-## Default ENV values
+see [FROM IMAGE README.md](https://github.com/davask/d-base)
 
-Define Default LANG LOCAL
-> DWL_LOCAL en_US.UTF-8
+## Open port
+- 80
 
-Define username:passwd for ssh access
-> DWL_USER_NAME dwl
-> DWL_USER_PASSWD dwl
+### Apache2 activation
+
+#### comment
+
+- to avoid init error all conf file in /etc/apache2/sites-available have to be in the format of sub.domain.ext.conf like docker.davaskweblimited.com.conf
+
+- On start all *.conf in /etc/apache2/sites-available are enabled
 
 ## LABEL
 
 > dwl.server.http="apache 2.4"
-> dwl.server.os="ubuntu 16.04"
-
