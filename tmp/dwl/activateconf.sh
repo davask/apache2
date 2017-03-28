@@ -5,4 +5,4 @@ for conf in `find /etc/apache2/sites-available -type f -name "*\.conf\.dwl"`; do
     mv -f ${conf} /etc/apache2/sites-available/${DWL_USER_DNS}.conf
     i=$(($i + 1));
 done;
-for DWL_USER_DNS in `echo ${DWL_DNS_TOPROCESS[*]}`; do echo ${DWL_USER_DNS}; done;
+for DWL_USER_DNS in `echo ${DWL_DNS_TOPROCESS[*]}`; do echo "DNS Activated: ${DWL_USER_DNS}"; done;
