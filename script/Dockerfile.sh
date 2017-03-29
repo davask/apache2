@@ -1,7 +1,18 @@
-FROM davask/d-base:u14.04
-MAINTAINER davask <docker@davaskweblimited.com>
-LABEL dwl.server.http="apache 2.4-u14.04"
+#/usr/bin/env bash
 
+branch=${1};
+parentBranch=${2};
+rootDir=${3};
+buildDir=${4};
+
+##############
+# Dockerfile #
+##############
+
+echo "FROM davask/d-base:${parentBranch}
+MAINTAINER davask <docker@davaskweblimited.com>
+LABEL dwl.server.http=\"apache ${branch}\"" > ${rootDir}/Dockerfile
+echo '
 # Apache conf
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
@@ -54,4 +65,6 @@ COPY ./build/dwl/virtualhost.sh /dwl/virtualhost.sh
 COPY ./build/dwl/apache2.sh /dwl/apache2.sh
 COPY ./build/dwl/init.sh /dwl/init.sh
 
+' >> ${rootDir}/Dockerfile
 
+echo "Dockerfile generated with Apache:${branch}";

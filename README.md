@@ -9,10 +9,12 @@ see [FROM IMAGE README.md](https://github.com/davask/d-base)
 
 #### comment
 
-- to avoid init error all conf file in /etc/apache2/sites-available have to be in the format of sub.domain.ext.conf like docker.davaskweblimited.com.conf
+- automatic configuration are handle for filename as [0-9]{4}\-subdomain\.domain\.tld\-[0-9]{2,3}\.conf\.dwl
 
 - On start all *.conf in /etc/apache2/sites-available are enabled
 
 ## LABEL
 
-> dwl.server.http="apache 2.4"
+> dwl.server.http="apache 2.4-u14.04"
+
+
