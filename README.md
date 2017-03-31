@@ -13,6 +13,16 @@ see [FROM IMAGE README.md](https://github.com/davask/d-base)
 
 - On start all *.conf in /etc/apache2/sites-available are enabled
 
+## virtualhost automatic conf
+
+> # ServerAdmin
+
+> # DocumentRoot
+
+> # ServerName
+
+> # ServerAlias
+
 ## LABEL
 
 > dwl.server.http="apache 2.4-u14.04"
