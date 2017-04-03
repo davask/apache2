@@ -48,8 +48,7 @@ RUN a2dissite default-ssl
 RUN rm -f /etc/apache2/sites-available/default-ssl.conf
 
 # Configure apache virtualhost.conf
-COPY ./build/dwl/default/etc/apache2/sites-available/0000-docker.davaskweblimited.com-80.conf.dwl /dwl/default/etc/apache2/sites-available/0000-docker.davaskweblimited.com-80.conf.dwl
-RUN cp -rdf /dwl/default/etc/apache2/sites-available/0000-docker.davaskweblimited.com-80.conf.dwl /etc/apache2/sites-available/0000-docker.davaskweblimited.com-80.conf.dwl
+COPY ./build/dwl/default/etc/apache2/sites-available/0000_docker.davaskweblimited.com_80.conf.dwl /dwl/default/etc/apache2/sites-available/0000_docker.davaskweblimited.com_80.conf.dwl
 
 EXPOSE 80
 
