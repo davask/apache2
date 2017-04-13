@@ -1,13 +1,14 @@
 #! /bin/bash
-
+DWL_SHIELD_HTTP=true
 if [ "$DWL_SHIELD_HTTP" == "true" ]; then
     DWL_APACHE2_SHIELD="/dwl/shield/apache2";
+    echo "Generate htpasswd with htpasswd -b -c '$DWL_APACHE2_SHIELD/.htpasswd $DWL_USER_NAME $DWL_USER_PASSWD'";
     if [ ! -d $DWL_APACHE2_SHIELD ]; then
         mkdir -p $DWL_APACHE2_SHIELD;
     fi
-    htpasswd -b -c $DWL_SHIELD $DWL_USER_NAME $DWL_USER_PASSWD;
-    if [ ! -f /etc/apache2/sites-available/0000_shield-http_0.conf ]; then
-        cp /dwl/default/etc/apache2/sites-available/0000_shield-http_0.conf /etc/apache2/sites-available;
+    htpasswd -b -c $DWL_APACHE2_SHIELD/.htpasswd $DWL_USER_NAME $DWL_USER_PASSWD;
+    if [ ! -f /var/www/html/.htaccess ]; then
+        cp /dwl/shield/default/var/www/html/.htaccess /var/www/html/.htaccess
     fi
 fi
 
