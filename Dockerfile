@@ -39,6 +39,7 @@ RUN rm -f /etc/apache2/sites-available/default-ssl.conf
 
 # Configure apache virtualhost.conf
 COPY ./build/dwl/default/etc/apache2/sites-available/0000_docker.davaskweblimited.com_80.conf.dwl /dwl/default/etc/apache2/sites-available/0000_docker.davaskweblimited.com_80.conf.dwl
+COPY ./build/dwl/default/etc/apache2/sites-available/0000_allowoverride_0.conf /dwl/default/etc/apache2/sites-available/0000_allowoverride_0.conf
 COPY ./build/dwl/shield/default/var/www/html/.htaccess /dwl/shield/default/var/www/html/.htaccess
 EXPOSE 80
 
