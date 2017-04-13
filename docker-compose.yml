@@ -9,6 +9,7 @@ d-apache:
     DWL_LOCAL_LANG: en_US:en
     DWL_USER_NAME: username
     DWL_SSH_ACCESS: 'true'
+    DWL_SHIELD_HTTP: 'false'
   log_driver: syslog
   labels:
     io.rancher.scheduler.affinity:host_label: dwl=dwlComPrivate

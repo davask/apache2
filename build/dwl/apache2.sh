@@ -1,5 +1,16 @@
 #! /bin/bash
 
+if [ "$DWL_SHIELD_HTTP" == "true" ]; then
+    DWL_APACHE2_SHIELD="/dwl/shield/apache2";
+    if [ ! -d $DWL_APACHE2_SHIELD ]; then
+        mkdir -p $DWL_APACHE2_SHIELD;
+    fi
+    htpasswd -b -c $DWL_SHIELD $DWL_USER_NAME $DWL_USER_PASSWD;
+    if [ ! -f /etc/apache2/sites-available/0000_shield-http_0.conf ]; then
+        cp /dwl/default/etc/apache2/sites-available/0000_shield-http_0.conf /etc/apache2/sites-available;
+    fi
+fi
+
 for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
     DWL_USER_DNS_CONF=${conf};
@@ -21,6 +32,7 @@ for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
 done;
 
+for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
 if [ -d /home/${DWL_USER_NAME}/files ]; then
     rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
     ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};

@@ -17,10 +17,10 @@ buildDir=`readlink -m "${thisDir}/build"`;
 . ./script/Dockerfile.sh ${branch} ${parentBranch} ${rootDir} ${buildDir}
 . ./script/README.sh ${branch} ${parentBranch} ${rootDir} ${buildDir}
 . ./script/docker-compose.sh ${branch} ${parentBranch} ${rootDir} ${buildDir}
+. ./script/portainer-template.sh ${branch} ${parentBranch} ${rootDir} ${buildDir}
 
 sudo docker build -t davask/d-apache:${branch} ${thisDir};
 
-echo "sudo docker run --name d-apache -tdi -p 65500:80/tcp -p 65502:22/tcp --label io.rancher.scheduler.affinity:host_label=dwl=dwlComPrivate davask/d-apache:${branch}";
-echo "http://public.ginkgo-migration.com:6408/env/1a5/apps/add-service?environmentId=&containerId=";
+echo "sudo docker run --name d-apache -tdi -p 65500:80/tcp -p 65502:22/tcp davask/d-apache:${branch}";
 
 exit 1;

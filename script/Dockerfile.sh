@@ -23,6 +23,7 @@ ENV APACHE_RUN_DIR /var/run/apache2
 
 ENV DWL_HTTP_SERVERADMIN contact@davaskweblimited.com
 ENV DWL_HTTP_DOCUMENTROOT /var/www/html
+ENV DWL_HTTP_SHIELD false
 
 # Update packages
 RUN apt-get update
@@ -49,6 +50,7 @@ RUN rm -f /etc/apache2/sites-available/default-ssl.conf
 
 # Configure apache virtualhost.conf
 COPY ./build/dwl/default/etc/apache2/sites-available/0000_docker.davaskweblimited.com_80.conf.dwl /dwl/default/etc/apache2/sites-available/0000_docker.davaskweblimited.com_80.conf.dwl
+COPY ./build/dwl/default/etc/apache2/sites-available/0000_shield-http_0.conf /dwl/default/etc/apache2/sites-available/0000_shield-http_0.conf
 
 EXPOSE 80
 
