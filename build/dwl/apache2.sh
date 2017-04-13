@@ -32,10 +32,10 @@ for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
 done;
 
-for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
 if [ -d /home/${DWL_USER_NAME}/files ]; then
     rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
     ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
 fi
+
 service apache2 start;
 DWL_KEEP_RUNNING=true;
