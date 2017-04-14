@@ -25,6 +25,6 @@ see [FROM IMAGE README.md](https://github.com/davask/d-base)
 
 ## LABEL
 
-> dwl.server.http="apache 2.4-u14.04"
+> dwl.server.http="apache u14.04"
 
 

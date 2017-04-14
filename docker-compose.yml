@@ -10,13 +10,12 @@ d-apache:
     DWL_USER_NAME: username
     DWL_SSH_ACCESS: 'true'
     DWL_SHIELD_HTTP: 'false'
-  log_driver: syslog
-  labels:
-    io.rancher.scheduler.affinity:host_label: dwl=dwlComPrivate
-  image: davask/d-apache:2.4-u14.04
-  hostname: private.davaskweblimited.com
+  image: davask/d-apache:u14.04
+  hostname: localhost
+  net: bridge
   volumes:
-  - /home/dwl/docker-images/http/d-apache/volumes/home/username/files:/home/username/files
+  - /home/dwl/docker-images/http/d-apache/volumes/proxy/log/localhost/apache2:/var/log/apache2
   - /home/dwl/docker-images/http/d-apache/volumes/home/username/http/app/sites-available:/etc/apache2/sites-available
+  - /home/dwl/docker-images/http/d-apache/volumes/home/username/files:/home/username/files
   working_dir: /var/www/html
 

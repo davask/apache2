@@ -1,6 +1,6 @@
-FROM davask/d-base:u14.04
+FROM davask/d-base:14.04
 MAINTAINER davask <docker@davaskweblimited.com>
-LABEL dwl.server.http="apache 2.4-u14.04"
+LABEL dwl.server.http="apache u14.04"
 
 # Apache conf
 ENV APACHE_LOCK_DIR /var/lock/apache2

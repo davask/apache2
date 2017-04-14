@@ -21,14 +21,13 @@ echo "d-apache:
     DWL_USER_NAME: username
     DWL_SSH_ACCESS: 'true'
     DWL_SHIELD_HTTP: 'false'
-  log_driver: syslog
-  labels:
-    io.rancher.scheduler.affinity:host_label: dwl=dwlComPrivate
   image: davask/d-apache:${branch}
-  hostname: private.davaskweblimited.com
+  hostname: localhost
+  net: bridge
   volumes:
-  - ${rootDir}/volumes/home/username/files:/home/username/files
+  - ${rootDir}/volumes/proxy/log/localhost/apache2:/var/log/apache2
   - ${rootDir}/volumes/home/username/http/app/sites-available:/etc/apache2/sites-available
+  - ${rootDir}/volumes/home/username/files:/home/username/files
   working_dir: /var/www/html
 " > ${rootDir}/docker-compose.yml
 
