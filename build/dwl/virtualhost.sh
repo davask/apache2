@@ -1,27 +1,41 @@
 #! /bin/bash
 
-DWL_USER_DNS=${1};
-DWL_USER_DNS_CONF=${2};
-DWL_USER_DNS_SERVERNAME=${3};
+for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
-sed -i "s|# ServerAdmin|ServerAdmin ${DWL_HTTP_SERVERADMIN:-contact@$DWL_USER_DNS_SERVERNAME}|g" ${DWL_USER_DNS_CONF};
+    DWL_USER_DNS_CONF=${conf};
 
-sed -i "s|# DocumentRoot|DocumentRoot ${DWL_HTTP_DOCUMENTROOT:-/var/www/html}|g" ${DWL_USER_DNS_CONF};
+    DWL_USER_DNS_DATA=`echo ${DWL_USER_DNS_CONF} | awk -F '[/]' '{print $5}' | sed "s|\.conf||g"`;
 
-if [ "${DWL_USER_DNS_SERVERNAME}" != "${DWL_USER_DNS}" ]; then
+    DWL_USER_DNS=`echo ${DWL_USER_DNS_DATA} | awk -F '[_]' '{print $2}'`;
+    DWL_USER_DNS_PORT=`echo ${DWL_USER_DNS_DATA} | awk -F '[_]' '{print $3}'`;
+    DWL_USER_DNS_PORT_CONTAINER=`echo ${DWL_USER_DNS_DATA} | awk -F '[_]' '{print $1}'`;
+    DWL_USER_DNS_SERVERNAME=`echo "${DWL_USER_DNS}" | awk -F '[\.]' '{print $(NF-1)"."$NF}'`;
 
-    echo "Handle virtualhost/ssl for top domain + domain";
+    echo "> configure virtualhost for ${DWL_USER_DNS} with path ${DWL_USER_DNS_CONF}";
 
-    sed -i "s|# ServerName|ServerName ${DWL_USER_DNS_SERVERNAME}|g" ${DWL_USER_DNS_CONF};
+    echo "Update virtualhost for top domain + domain";
 
-    sed -i "s|# ServerAlias|ServerAlias ${DWL_USER_DNS}|g" ${DWL_USER_DNS_CONF};
+    sed -i "s|# ServerAdmin|ServerAdmin ${DWL_HTTP_SERVERADMIN:-contact@$DWL_USER_DNS_SERVERNAME}|g" ${DWL_USER_DNS_CONF};
 
-else
+    sed -i "s|# DocumentRoot|DocumentRoot ${DWL_HTTP_DOCUMENTROOT:-/var/www/html}|g" ${DWL_USER_DNS_CONF};
 
-    echo "Handle virtualhost/ssl for domain";
+    if [ "${DWL_USER_DNS_SERVERNAME}" != "${DWL_USER_DNS}" ]; then
 
-    sed -i "s|# ServerName|ServerName ${DWL_USER_DNS}|g" ${DWL_USER_DNS_CONF};
+        echo "Handle virtualhost/ssl for top domain + domain";
 
-    sed -i "s|# ServerAlias||g" ${DWL_USER_DNS_CONF};
+        sed -i "s|# ServerName|ServerName ${DWL_USER_DNS_SERVERNAME}|g" ${DWL_USER_DNS_CONF};
 
-fi
+        sed -i "s|# ServerAlias|ServerAlias ${DWL_USER_DNS}|g" ${DWL_USER_DNS_CONF};
+
+    else
+
+        echo "Handle virtualhost/ssl for domain";
+
+        sed -i "s|# ServerName|ServerName ${DWL_USER_DNS}|g" ${DWL_USER_DNS_CONF};
+
+        sed -i "s|# ServerAlias||g" ${DWL_USER_DNS_CONF};
+
+    fi
+
+done;
+

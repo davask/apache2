@@ -1,5 +1,4 @@
 #! /bin/bash
-DWL_SHIELD_HTTP=true
 if [ "$DWL_SHIELD_HTTP" == "true" ]; then
     DWL_APACHE2_SHIELD="/dwl/shield/apache2";
     echo "Generate htpasswd with htpasswd -b -c '$DWL_APACHE2_SHIELD/.htpasswd $DWL_USER_NAME $DWL_USER_PASSWD'";
@@ -21,20 +20,6 @@ for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
     DWL_USER_DNS_DATA=`echo ${DWL_USER_DNS_CONF} | awk -F '[/]' '{print $5}' | sed "s|\.conf||g"`;
 
-    DWL_USER_DNS=`echo ${DWL_USER_DNS_DATA} | awk -F '[_]' '{print $2}'`;
-    DWL_USER_DNS_PORT=`echo ${DWL_USER_DNS_DATA} | awk -F '[_]' '{print $3}'`;
-    DWL_USER_DNS_PORT_CONTAINER=`echo ${DWL_USER_DNS_DATA} | awk -F '[_]' '{print $1}'`;
-    DWL_USER_DNS_SERVERNAME=`echo "${DWL_USER_DNS}" | awk -F '[\.]' '{print $(NF-1)"."$NF}'`;
-
-    if [ "$DWL_USER_DNS_PORT_CONTAINER" != "80" ]; then
-
-        echo "> configure virtualhost for ${DWL_USER_DNS} with path ${DWL_USER_DNS_CONF}";
-
-        echo "Update virtualhost for top domain + domain";
-
-        . ${dwlDir}/virtualhost.sh "${DWL_USER_DNS}" "${DWL_USER_DNS_CONF}" "${DWL_USER_DNS_SERVERNAME}"
-
-    fi
     a2ensite ${DWL_USER_DNS_DATA};
 
 done;
