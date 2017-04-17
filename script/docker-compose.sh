@@ -20,6 +20,7 @@ echo "d-apache:
     DWL_LOCAL_LANG: en_US:en
     DWL_USER_NAME: username
     DWL_SSH_ACCESS: 'true'
+    DWL_HTTP_SERVERADMIN: contact@localhost
     DWL_SHIELD_HTTP: 'false'
   image: davask/d-apache:${branch}
   hostname: localhost
