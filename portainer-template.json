@@ -5,7 +5,8 @@
     "logo": "https://www.apache.org/images/feathertm.gif",
     "image": "davask/d-apache:2.4-u14.04",
     "ports": [
-        "22/tcp"
+        "22/tcp",
+        "80/tcp"
     ],
     "env": [
         {
@@ -41,9 +42,9 @@
         }
     ],
     "volumes": [
-        "/home/username,
-/var/log/apache2,
-/etc/apache2/sites-available"
+        "/home/username",
+        "/var/log/apache2",
+        "/etc/apache2/sites-available"
     ]
   }
 ]
