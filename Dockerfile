@@ -1,5 +1,6 @@
 FROM davask/d-base:u14.04
 MAINTAINER davask <docker@davaskweblimited.com>
+USER root
 LABEL dwl.server.http="apache 2.4-u14.04"
 
 # Apache conf
@@ -58,4 +59,5 @@ COPY ./build/dwl/activateconf.sh /dwl/activateconf.sh
 COPY ./build/dwl/virtualhost.sh /dwl/virtualhost.sh
 COPY ./build/dwl/apache2.sh /dwl/apache2.sh
 COPY ./build/dwl/init.sh /dwl/init.sh
+USER admin
 

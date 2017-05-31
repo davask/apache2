@@ -11,6 +11,7 @@ buildDir=${4};
 
 echo "FROM davask/d-base:${parentBranch}
 MAINTAINER davask <docker@davaskweblimited.com>
+USER root
 LABEL dwl.server.http=\"apache ${branch}\"" > ${rootDir}/Dockerfile
 echo '
 # Apache conf
@@ -69,6 +70,7 @@ COPY ./build/dwl/activateconf.sh /dwl/activateconf.sh
 COPY ./build/dwl/virtualhost.sh /dwl/virtualhost.sh
 COPY ./build/dwl/apache2.sh /dwl/apache2.sh
 COPY ./build/dwl/init.sh /dwl/init.sh
+USER admin
 ' >> ${rootDir}/Dockerfile
 
 echo "Dockerfile generated with Apache:${branch}";
