@@ -15,8 +15,12 @@ ENV DWL_HTTP_DOCUMENTROOT /var/www/html
 ENV DWL_HTTP_SHIELD false
 
 # Update packages
+RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/apache2
 RUN apt-get update
-RUN apt-get install -y apache2
+# ubuntu 14.04
+RUN apt-get install -y apache2=2.4.25-3+deb.sury.org~trusty+1
+# ubuntu 16.04
+# RUN apt-get install -y apache2
 RUN apt-get install -y apache2-utils
 RUN rm -rf /var/lib/apt/lists/*
 
