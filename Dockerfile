@@ -1,7 +1,7 @@
-FROM davask/d-base:u14.04
+FROM davask/d-base:d8.8
 MAINTAINER davask <docker@davaskweblimited.com>
 USER root
-LABEL dwl.server.http="apache 2.4-u14.04"
+LABEL dwl.server.http="apache 2.4-d8.8"
 
 # Apache conf
 ENV APACHE_LOCK_DIR /var/lock/apache2
@@ -16,13 +16,11 @@ ENV DWL_HTTP_DOCUMENTROOT /var/www/html
 ENV DWL_HTTP_SHIELD false
 
 # Update packages
-RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/apache2
 RUN apt-get update
-# ubuntu 14.04
-RUN apt-get install -y apache2=2.4.25-3+deb.sury.org~trusty+1
-# ubuntu 16.04
-# RUN apt-get install -y apache2
+# Debian 8.8
+RUN apt-get install -y apache2
 RUN apt-get install -y apache2-utils
+RUN apt-get autoremove -y
 RUN rm -rf /var/lib/apt/lists/*
 
 # Configure apache

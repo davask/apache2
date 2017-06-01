@@ -11,7 +11,7 @@ d-apache:
     DWL_SSH_ACCESS: 'true'
     DWL_HTTP_SERVERADMIN: contact@localhost
     DWL_SHIELD_HTTP: 'false'
-  image: davask/d-apache:2.4-u14.04
+  image: davask/d-apache:2.4-d8.8
   hostname: localhost
   net: bridge
   volumes:
