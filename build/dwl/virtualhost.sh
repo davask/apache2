@@ -1,6 +1,6 @@
 #! /bin/bash
 
-for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
+for conf in `sudo find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
     DWL_USER_DNS_CONF=${conf};
 
@@ -15,13 +15,13 @@ for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
     echo "Update virtualhost for top domain + domain";
 
-    sed -i "s|# ServerAdmin|ServerAdmin ${DWL_HTTP_SERVERADMIN:-contact@$DWL_USER_DNS_SERVERNAME}|g" ${DWL_USER_DNS_CONF};
+    sudo sed -i "s|# ServerAdmin|ServerAdmin ${DWL_HTTP_SERVERADMIN:-contact@$DWL_USER_DNS_SERVERNAME}|g" ${DWL_USER_DNS_CONF};
 
-    sed -i "s|# DocumentRoot|DocumentRoot ${DWL_HTTP_DOCUMENTROOT:-/var/www/html}|g" ${DWL_USER_DNS_CONF};
+    sudo sed -i "s|# DocumentRoot|DocumentRoot ${DWL_HTTP_DOCUMENTROOT:-/var/www/html}|g" ${DWL_USER_DNS_CONF};
 
     echo "Handle virtualhost/ssl for domain";
 
-    sed -i "s|# ServerName|ServerName ${DWL_USER_DNS_SERVERNAME}|g" ${DWL_USER_DNS_CONF};
+    sudo sed -i "s|# ServerName|ServerName ${DWL_USER_DNS_SERVERNAME}|g" ${DWL_USER_DNS_CONF};
 
 done;
 

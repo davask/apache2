@@ -57,5 +57,6 @@ COPY ./build/dwl/activateconf.sh /dwl/activateconf.sh
 COPY ./build/dwl/virtualhost.sh /dwl/virtualhost.sh
 COPY ./build/dwl/apache2.sh /dwl/apache2.sh
 COPY ./build/dwl/init.sh /dwl/init.sh
+RUN chown root:sudo -R /dwl
 USER admin
 
