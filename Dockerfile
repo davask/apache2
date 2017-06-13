@@ -45,7 +45,8 @@ COPY ./build/dwl/default/etc/apache2/sites-available/0000_docker.davaskweblimite
 COPY ./build/dwl/default/etc/apache2/sites-available/0000_allowoverride_0.conf /dwl/default/etc/apache2/sites-available/0000_allowoverride_0.conf
 COPY ./build/dwl/shield/default/var/www/html/.htaccess /dwl/shield/default/var/www/html/.htaccess
 EXPOSE 80
-HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD curl -f http://localhost:80 || exit 1
+HEALTHCHECK --interval=5m --timeout=3s \
+CMD curl -f http://localhost/ || exit 1
 
 WORKDIR /var/www/html
 
