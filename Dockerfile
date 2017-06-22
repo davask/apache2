@@ -16,17 +16,18 @@ ENV DWL_HTTP_DOCUMENTROOT /var/www/html
 ENV DWL_HTTP_SHIELD false
 
 # Update packages
-RUN apt-get update
-# Debian 8.8
-RUN apt-get install -y apache2
-RUN apt-get install -y apache2-utils
-RUN apt-get autoremove -y
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+apt-get install -y \
+apache2
+apache2-utils
+RUN apt-get autoremove -y; \
+rm -rf /var/lib/apt/lists/*
 
 # Configure apache
-RUN a2enmod rewrite
-RUN a2enmod expires
-RUN a2enmod headers
+RUN a2enmod \
+rewrite \
+expires \
+headers
 
 COPY ./build/dwl/default/etc/apache2/apache2.conf /dwl/default/etc/apache2/apache2.conf
 RUN cp -rdf /dwl/default/etc/apache2/apache2.conf /etc/apache2/apache2.conf
@@ -35,14 +36,11 @@ RUN a2enmod cgi
 # proxy protection
 RUN a2enmod remoteip
 
-RUN a2dissite 000-default
-RUN rm -f /etc/apache2/sites-available/000-default.conf
-RUN a2dissite default-ssl
-RUN rm -f /etc/apache2/sites-available/default-ssl.conf
+RUN a2dissite 000-default; rm -f /etc/apache2/sites-available/000-default.conf
+RUN a2dissite default-ssl; rm -f /etc/apache2/sites-available/default-ssl.conf
 
 # Configure apache virtualhost.conf
-COPY ./build/dwl/default/etc/apache2/sites-available/0000_docker.davaskweblimited.com_80.conf.dwl /dwl/default/etc/apache2/sites-available/0000_docker.davaskweblimited.com_80.conf.dwl
-COPY ./build/dwl/default/etc/apache2/sites-available/0000_allowoverride_0.conf /dwl/default/etc/apache2/sites-available/0000_allowoverride_0.conf
+COPY ./build/dwl/default/etc/apache2/sites-available /dwl/default/etc/apache2/
 COPY ./build/dwl/shield/default/var/www/html/.htaccess /dwl/shield/default/var/www/html/.htaccess
 EXPOSE 80
 HEALTHCHECK --interval=5m --timeout=3s \
@@ -53,12 +51,12 @@ WORKDIR /var/www/html
 COPY ./build/dwl/default/var/www/html /dwl/default/var/www/html
 RUN cp -rdf /dwl/default/var/www/html /var/www
 
-COPY ./build/dwl/live /dwl/live
-
-COPY ./build/dwl/activateconf.sh /dwl/activateconf.sh
-COPY ./build/dwl/virtualhost.sh /dwl/virtualhost.sh
-COPY ./build/dwl/apache2.sh /dwl/apache2.sh
-COPY ./build/dwl/init.sh /dwl/init.sh
+COPY ./build/dwl/live \
+./build/dwl/activateconf.sh \
+./build/dwl/virtualhost.sh \
+./build/dwl/apache2.sh \
+./build/dwl/init.sh \
+/dwl/
 RUN chown root:sudo -R /dwl
 USER admin
 
