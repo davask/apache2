@@ -43,8 +43,5 @@
 
 ## virtualhost automatic conf
 
-> # ServerAdmin
-> # DocumentRoot
-> # ServerName
-> # ServerAlias
+
 
