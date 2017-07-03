@@ -17,11 +17,11 @@ ENV DWL_HTTP_SHIELD false
 
 # Update packages
 RUN apt-get update && \
-apt-get install -y \
-apache2 \
-apache2-utils
-RUN apt-get autoremove -y; \
-rm -rf /var/lib/apt/lists/*
+apt-get install -y apache2 apache2-utils
+RUN apt-get upgrade -y && \
+apt-get autoremove -y && \
+apt-get clean && \
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Configure apache
 RUN a2enmod \
@@ -36,20 +36,22 @@ RUN a2enmod cgi
 # proxy protection
 RUN a2enmod remoteip
 
-RUN a2dissite 000-default; rm -f /etc/apache2/sites-available/000-default.conf
-RUN a2dissite default-ssl; rm -f /etc/apache2/sites-available/default-ssl.conf
+RUN a2dissite 000-default && rm -f /etc/apache2/sites-available/000-default.conf
+RUN a2dissite default-ssl && rm -f /etc/apache2/sites-available/default-ssl.conf
 
 # Configure apache virtualhost.conf
 COPY ./build/dwl/default/etc/apache2/sites-available /dwl/default/etc/apache2/
 COPY ./build/dwl/shield/default/var/www/html/.htaccess /dwl/shield/default/var/www/html/.htaccess
+
 EXPOSE 80
+
 HEALTHCHECK --interval=5m --timeout=3s \
 CMD curl -f http://localhost/ || exit 1
 
-WORKDIR /var/www/html
-
 COPY ./build/dwl/default/var/www/html /dwl/default/var/www/html
-RUN cp -rdf /dwl/default/var/www/html /var/www
+RUN rm -rdf /var/www/html && cp -rdf /dwl/default/var/www/html /var/www
+
+WORKDIR /var/www/html
 
 COPY ./build/dwl/live \
 ./build/dwl/activateconf.sh \
@@ -57,6 +59,6 @@ COPY ./build/dwl/live \
 ./build/dwl/apache2.sh \
 ./build/dwl/init.sh \
 /dwl/
-RUN chown root:sudo -R /dwl
-USER admin
 
+RUN chmod +x /dwl/init.sh && chown root:sudo -R /dwl
+USER admin

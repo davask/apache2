@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh -e
 
 cd .; cd -;
 
@@ -23,4 +23,3 @@ echo ">> Virtualhost generic update";
 . ${dwlDir}/apache2.sh
 echo ">> Apache2 initialized";
 
-. ${dwlDir}/keeprunning.sh

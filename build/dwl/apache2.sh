@@ -28,6 +28,3 @@ if [ -d /home/${DWL_USER_NAME}/files ]; then
     sudo rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
     sudo ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
 fi
-
-sudo service apache2 start;
-DWL_KEEP_RUNNING=true;
