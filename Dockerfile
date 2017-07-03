@@ -1,6 +1,7 @@
 FROM davask/d-base:u12.04
 MAINTAINER davask <docker@davaskweblimited.com>
-LABEL dwl.server.http="apache 2.4"
+USER root
+LABEL dwl.server.http="apache 2.4-u12.04"
 
 # Apache conf
 ENV APACHE_LOCK_DIR /var/lock/apache2
@@ -10,33 +11,48 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_RUN_DIR /var/run/apache2
 
+ENV DWL_HTTP_SERVERADMIN contact@davaskweblimited.com
+ENV DWL_HTTP_DOCUMENTROOT /var/www/html
+ENV DWL_HTTP_SHIELD false
+
 # Update packages
-# RUN /bin/bash -c 'add-apt-repository ppa:ondrej/apache2'
-RUN /bin/bash -c 'apt-get update'
-RUN /bin/bash -c 'apt-get install -y apache2'
-RUN /bin/bash -c 'apt-get install -y apache2-utils'
-RUN /bin/bash -c 'rm -rf /var/lib/apt/lists/*'
+RUN apt-get update && \
+apt-get install -y apache2 apache2-utils
+RUN apt-get upgrade -y && \
+apt-get autoremove -y && \
+apt-get clean && \
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Configure apache
-RUN /bin/bash -c 'a2enmod rewrite'
-RUN /bin/bash -c 'a2enmod expires'
-RUN /bin/bash -c 'a2enmod headers'
-RUN /bin/bash -c 'a2enmod cgi'
-# RUN /bin/bash -c 'apache2 -v'
-# proxy protection
-# RUN /bin/bash -c 'a2enmod remoteip'
+RUN a2enmod \
+rewrite \
+expires \
+headers
 
-RUN /bin/bash -c 'rm -f /etc/apache2/sites-enabled/000-default.conf &>> null'
-RUN /bin/bash -c 'rm -f /etc/apache2/sites-available/000-default.conf &>> null'
+COPY ./build/dwl/default/etc/apache2/apache2.conf /dwl/default/etc/apache2/apache2.conf
+RUN cp -rdf /dwl/default/etc/apache2/apache2.conf /etc/apache2/apache2.conf
+RUN a2enmod cgi
+
+# proxy protection
+RUN a2enmod remoteip
+
+RUN a2dissite 000-default && rm -f /etc/apache2/sites-available/000-default.conf
+RUN a2dissite default-ssl && rm -f /etc/apache2/sites-available/default-ssl.conf
 
 # Configure apache virtualhost.conf
-COPY ./tmp/dwl/docker.davaskweblimited.com.conf.dwl /tmp/dwl/docker.davaskweblimited.com.conf.dwl
-RUN /bin/bash -c 'cp -rdf /tmp/dwl/docker.davaskweblimited.com.conf.dwl /etc/apache2/sites-available/docker.davaskweblimited.com.conf.dwl'
+COPY ./build/dwl/default/etc/apache2/sites-available /dwl/default/etc/apache2/
+COPY ./build/dwl/shield/default/var/www/html/.htaccess /dwl/shield/default/var/www/html/.htaccess
 
 EXPOSE 80
 
-COPY ./var/www/html /var/www/html
-COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
-COPY ./tmp/dwl/activateconf.sh /tmp/dwl/activateconf.sh
-COPY ./tmp/dwl/apache2.sh /tmp/dwl/apache2.sh
-COPY ./tmp/dwl/init.sh /tmp/dwl/init.sh
+HEALTHCHECK --interval=5m --timeout=3s \
+CMD curl -f http://localhost/ || exit 1
+
+COPY ./build/dwl/default/var/www/html /dwl/default/var/www/html
+RUN rm -rdf /var/www/html && cp -rdf /dwl/default/var/www/html /var/www
+
+WORKDIR /var/www/html
+
+COPY ./build/dwl/live ./build/dwl/activateconf.sh ./build/dwl/virtualhost.sh ./build/dwl/apache2.sh ./build/dwl/init.sh /dwl/
+RUN chmod +x /dwl/init.sh && chown root:sudo -R /dwl
+USER admin
