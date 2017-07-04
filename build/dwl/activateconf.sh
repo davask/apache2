@@ -1,5 +1,8 @@
 #! /bin/bash
 
+if [ ! -d /dwl/live ]; then
+    sudo mkdir -p /dwl/live;
+fi
 if [ -f /dwl/live/backup.list ]; then
     sudo rm /dwl/live/backup.list;
 fi
