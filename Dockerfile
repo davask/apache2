@@ -60,5 +60,7 @@ COPY ./build/dwl/live \
 ./build/dwl/init.sh \
 /dwl/
 
+CMD ["/dwl/init.sh && apachectl -k graceful && /bin/bash"]
+
 RUN chmod +x /dwl/init.sh && chown root:sudo -R /dwl
 USER admin
