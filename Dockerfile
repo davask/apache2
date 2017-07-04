@@ -15,6 +15,9 @@ ENV DWL_HTTP_SERVERADMIN contact@davaskweblimited.com
 ENV DWL_HTTP_DOCUMENTROOT /var/www/html
 ENV DWL_HTTP_SHIELD false
 
+# Update packages
+RUN apt-get update && \
+apt-get install -y python-software-properties
 RUN add-apt-repository ppa:ondrej/apache2;
 
 # Update packages
