@@ -15,6 +15,8 @@ ENV DWL_HTTP_SERVERADMIN contact@davaskweblimited.com
 ENV DWL_HTTP_DOCUMENTROOT /var/www/html
 ENV DWL_HTTP_SHIELD false
 
+RUN add-apt-repository ppa:ondrej/apache2;
+
 # Update packages
 RUN apt-get update && \
 apt-get install -y apache2 apache2-utils
@@ -53,6 +55,14 @@ RUN rm -rdf /var/www/html && cp -rdf /dwl/default/var/www/html /var/www
 
 WORKDIR /var/www/html
 
-COPY ./build/dwl/live ./build/dwl/activateconf.sh ./build/dwl/virtualhost.sh ./build/dwl/apache2.sh ./build/dwl/init.sh /dwl/
+COPY ./build/dwl/live \
+./build/dwl/activateconf.sh \
+./build/dwl/virtualhost.sh \
+./build/dwl/apache2.sh \
+./build/dwl/init.sh \
+/dwl/
+
+CMD ["/dwl/init.sh && apachectl -k graceful && /bin/bash"]
+
 RUN chmod +x /dwl/init.sh && chown root:sudo -R /dwl
 USER admin

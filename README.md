@@ -43,8 +43,12 @@
 
 ## virtualhost automatic conf
 
-> # ServerAdmin
-> # DocumentRoot
-> # ServerName
-> # ServerAlias
+```bash
+
+# ServerAdmin
+# DocumentRoot
+# ServerName
+# ServerAlias
+
+```
 
