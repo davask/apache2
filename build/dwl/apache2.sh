@@ -1,16 +1,16 @@
 #! /bin/bash
 if [ "$DWL_SHIELD_HTTP" == "true" ]; then
-    DWL_APACHE2_SHIELD="/dwl/shield/apache2";
+    DWL_APACHE2_SHIELD="/dwl/shield/htaccess";
     echo "Generate htpasswd with htpasswd -b -c '$DWL_APACHE2_SHIELD/.htpasswd $DWL_USER_NAME $DWL_USER_PASSWD'";
     if [ ! -d $DWL_APACHE2_SHIELD ]; then
         sudo mkdir -p $DWL_APACHE2_SHIELD;
     fi
     htpasswd -b -c $DWL_APACHE2_SHIELD/.htpasswd $DWL_USER_NAME $DWL_USER_PASSWD;
     if [ ! -f /etc/apache2/sites-available/0000_allowoverride_0.conf ]; then
-        sudo cp /dwl/default/etc/apache2/sites-available/0000_allowoverride_0.conf /etc/apache2/sites-available
+        sudo cp /dwl/etc/apache2/sites-available/0000_allowoverride_0.conf /etc/apache2/sites-available
     fi
     if [ ! -f /var/www/html/.htaccess ]; then
-        sudo cp /dwl/shield/default/var/www/html/.htaccess /var/www/html/.htaccess
+        sudo cp /dwl/shield/var/www/html/.htaccess /var/www/html/.htaccess
     fi
 fi
 
