@@ -29,8 +29,8 @@ rewrite \
 expires \
 headers
 
-COPY ./build/dwl/default/etc/apache2/apache2.conf /dwl/default/etc/apache2/apache2.conf
-RUN cp -rdf /dwl/default/etc/apache2/apache2.conf /etc/apache2/apache2.conf
+COPY ./build/dwl/etc/apache2/apache2.conf /dwl/etc/apache2/apache2.conf
+RUN cp -rdf /dwl/etc/apache2/apache2.conf /etc/apache2/apache2.conf
 RUN a2enmod cgi
 
 # proxy protection
@@ -40,16 +40,16 @@ RUN a2dissite 000-default && rm -f /etc/apache2/sites-available/000-default.conf
 RUN a2dissite default-ssl && rm -f /etc/apache2/sites-available/default-ssl.conf
 
 # Configure apache virtualhost.conf
-COPY ./build/dwl/default/etc/apache2/sites-available /dwl/default/etc/apache2/
-COPY ./build/dwl/shield/default/var/www/html/.htaccess /dwl/shield/default/var/www/html/.htaccess
+COPY ./build/dwl/etc/apache2/sites-available /dwl/etc/apache2/
+COPY ./build/dwl/shield/var/www/html/.htaccess /dwl/shield/var/www/html/.htaccess
 
 EXPOSE 80
 
 HEALTHCHECK --interval=5m --timeout=3s \
 CMD curl -f http://localhost/ || exit 1
 
-COPY ./build/dwl/default/var/www/html /dwl/default/var/www/html
-RUN rm -rdf /var/www/html && cp -rdf /dwl/default/var/www/html /var/www
+COPY ./build/dwl/var/www/html /dwl/var/www/html
+RUN rm -rdf /var/www/html && cp -rdf /dwl/var/www/html /var/www
 
 WORKDIR /var/www/html
 

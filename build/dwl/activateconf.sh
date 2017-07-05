@@ -1,11 +1,21 @@
 #! /bin/bash
 
+if [ ! -d /dwl/live ]; then
+    sudo mkdir -p /dwl/live;
+fi
 if [ -f /dwl/live/backup.list ]; then
     sudo rm /dwl/live/backup.list;
 fi
+sudo touch /dwl/live/backup.list;
+
+if [ ! -d /dwl/live/conf ]; then
+    sudo mkdir -p /dwl/live/conf;
+fi
 sudo rm -rdf /dwl/live/conf/*;
 
-sudo touch /dwl/live/backup.list;
+if [ ! -d /dwl/live/backup ]; then
+    sudo mkdir -p /dwl/live/backup;
+fi
 
 for conf in `sudo find /dwl/live/backup -type f -name "*\.conf\.dwl"`; do
 
@@ -41,7 +51,7 @@ for DWL_USER_DNS_DATA in `cat /dwl/live/backup.list`; do
 
 done;
 
-for conf in `sudo find /dwl/default/etc/apache2/sites-available -type f -name "*\.conf"`; do
+for conf in `sudo find /dwl/etc/apache2/sites-available -type f -name "*\.conf"`; do
 
     sudo cp -rdf ${conf} /dwl/live/conf;
 
