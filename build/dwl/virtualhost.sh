@@ -2,7 +2,7 @@
 
 for conf in `sudo find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
-    . ./vhost-env.conf;
+    . ${dwlDir}/vhost-env.sh;
 
     echo "> configure virtualhost for ${DWL_USER_DNS} with path ${DWL_USER_DNS_CONF}";
 
