@@ -53,8 +53,7 @@ RUN rm -rdf /var/www/html && cp -rdf /dwl/var/www/html /var/www
 
 WORKDIR /var/www/html
 
-COPY ./build/dwl/live \
-./build/dwl/activateconf.sh \
+COPY ./build/dwl/activateconf.sh \
 ./build/dwl/virtualhost.sh \
 ./build/dwl/apache2.sh \
 ./build/dwl/init.sh \
