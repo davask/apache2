@@ -6,8 +6,8 @@ if [ "$DWL_SHIELD_HTTP" == "true" ]; then
         sudo mkdir -p $DWL_APACHE2_SHIELD;
     fi
     htpasswd -b -c $DWL_APACHE2_SHIELD/.htpasswd $DWL_USER_NAME $DWL_USER_PASSWD;
-    if [ ! -f /etc/apache2/sites-available/0000_allowoverride_0.conf ]; then
-        sudo cp /dwl/etc/apache2/sites-available/0000_allowoverride_0.conf /etc/apache2/sites-available
+    if [ ! -f /etc/apache2/sites-available/0000_override.rules_0.conf ]; then
+        sudo cp /dwl/etc/apache2/sites-available/0000_override.rules_0.conf /etc/apache2/sites-available
     fi
     if [ ! -f /var/www/html/.htaccess ]; then
         sudo cp /dwl/shield/var/www/html/.htaccess /var/www/html/.htaccess
