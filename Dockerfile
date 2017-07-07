@@ -60,7 +60,7 @@ COPY ./build/dwl/vhost-env.sh \
 ./build/dwl/init.sh \
 /dwl/
 
-CMD ["/dwl/init.sh && apachectl -k graceful && /bin/bash"]
+CMD ["/bin/bash /dwl/init.sh && apachectl -k graceful && /bin/bash"]
 
 RUN chmod +x /dwl/init.sh && chown root:sudo -R /dwl
 USER admin
