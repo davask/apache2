@@ -60,7 +60,7 @@ COPY ./build/dwl/vhost-env.sh \
 ./build/dwl/init.sh \
 /dwl/
 
-CMD ["/bin/bash /dwl/init.sh && apache2ctl -D FOREGROUND"]
+CMD ["/bin/bash /dwl/init.sh && sudo apache2ctl -D FOREGROUND"]
 
 RUN chmod +x /dwl/init.sh && chown root:sudo -R /dwl
 USER admin
