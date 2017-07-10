@@ -33,3 +33,5 @@ for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
     sudo a2ensite ${DWL_USER_DNS_DATA};
 
 done;
+
+sudo service apache2 start;
