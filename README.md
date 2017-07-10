@@ -8,7 +8,7 @@
 
 - DWL_LOCAL_LANG: 'en_US:en'
 - DWL_LOCAL: 'en_US.UTF-8'
-- DWL_USER_NAME: 'username'
+- DWL_SUDO_USER: 'false'
 - DWL_SSH_ACCESS: 'false'
 - DWL_USER_ID: '1000'
 - DWL_USER_PASSWD: 'secret'
@@ -19,13 +19,11 @@
 - APACHE_LOG_DIR: '/var/log/apache2'
 - APACHE_RUN_DIR: '/var/run/apache2'
 - DWL_HTTP_SERVERADMIN: 'admin@localhost'
-- DWL_HTTP_DOCUMENTROOT: '/var/www/html'
+- DWL_HTTP_DOCUMENTROOT: '/var/www'
 - DWL_HTTP_SHIELD: 'false'
 ## Available volumes
 
-- /home/username
-- /var/log/apache2
-- /etc/apache2/sites-available
+- /home/host
 ## LABEL
 
 - dwl.server.os="base 2.4-u16.04"
