@@ -12,7 +12,7 @@ ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_RUN_DIR /var/run/apache2
 
 ENV DWL_HTTP_SERVERADMIN contact@davaskweblimited.com
-ENV DWL_HTTP_DOCUMENTROOT /var/www
+ENV DWL_HTTP_DOCUMENTROOT /var/www/html
 ENV DWL_HTTP_SHIELD false
 
 # Update packages

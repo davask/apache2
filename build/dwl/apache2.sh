@@ -4,7 +4,9 @@ if [ -d /home/${DWL_USER_NAME}/files ]; then
     sudo rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
     sudo ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
 else
-    sudo mkdir -p /home/${DWL_USER_NAME}/files;
+    if [ ! -d /home/${DWL_USER_NAME}/files ]; then
+        sudo mkdir -p /home/${DWL_USER_NAME}/files;
+    fi
     sudo rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
     sudo ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
 fi
