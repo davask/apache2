@@ -6,8 +6,8 @@
 [![[dwl] apache:2.4-d8.8 image][badge-docker]](https://hub.docker.com/r/davask/d-apache/)
 
 [badge-docker]: https://dockeri.co/image/davask/d-apache "[dwl] apache:2.4-d8.8 image"
-[badge-shields]: https://img.shields.io/badge/davask%2Fd--apache-env prod-brightgreen.svg?style=flat "[dwl] apache:2.4-d8.8 in prod"
-[badge-fossa]: https://img.shields.io/badge/davask%2Fd--apache-license MIT-brightgreen.svg?style=flat "[dwl] apache:2.4-d8.8 license"
+[badge-shields]: https://img.shields.io/badge/davask%2Fd--apache-env_prod-brightgreen.svg?style=flat "[dwl] apache:2.4-d8.8 in prod"
+[badge-fossa]: https://img.shields.io/badge/davask%2Fd--apache-license_MIT-brightgreen.svg?style=flat "[dwl] apache:2.4-d8.8 license"
 
 ## Exposed port
 
