@@ -1,4 +1,16 @@
-#! /bin/bash
+#!/bin/bash
+
+if [ -d /home/${DWL_USER_NAME}/files ]; then
+    sudo rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
+    sudo ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
+else
+    if [ ! -d /home/${DWL_USER_NAME}/files ]; then
+        sudo mkdir -p /home/${DWL_USER_NAME}/files;
+    fi
+    sudo rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
+    sudo ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
+fi
+
 if [ "$DWL_SHIELD_HTTP" == "true" ]; then
     DWL_APACHE2_SHIELD="/dwl/shield/htaccess";
     echo "Generate htpasswd with htpasswd -b -c '$DWL_APACHE2_SHIELD/.htpasswd $DWL_USER_NAME $DWL_USER_PASSWD'";
@@ -14,17 +26,20 @@ if [ "$DWL_SHIELD_HTTP" == "true" ]; then
     fi
 fi
 
-for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
+for conf in `sudo find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
     DWL_USER_DNS_CONF=${conf};
 
     DWL_USER_DNS_DATA=`echo ${DWL_USER_DNS_CONF} | awk -F '[/]' '{print $5}' | sed "s|\.conf||g"`;
 
+    echo "a2ensite ${DWL_USER_DNS_DATA}";
+
     sudo a2ensite ${DWL_USER_DNS_DATA};
 
 done;
 
-if [ -d /home/${DWL_USER_NAME}/files ]; then
-    sudo rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
-    sudo ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
+if [ "`sudo service apache2 status | grep 'apache2 is running' | wc -l`" == "0" ]; then
+    sudo service apache2 start;
 fi
+
+sudo service apache2 reload;

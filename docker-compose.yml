@@ -1,4 +1,4 @@
-version:"3"
+version: "3"
 
 services:
   app:
@@ -10,11 +10,11 @@ services:
       DWL_LOCAL_LANG: 'en_US:en'
       DWL_LOCAL: 'en_US.UTF-8'
       DWL_USER_NAME: 'username'
-      DWL_SSH_ACCESS: 'false'
-      DWL_USER_ID: '1000'
       DWL_USER_PASSWD: 'secret'
+      DWL_USER_ID: '1000'
+      DWL_SSH_ACCESS: 'false'
       DWL_HTTP_SERVERADMIN: 'admin@localhost'
-      DWL_HTTP_DOCUMENTROOT: '/var/www/html'
+      DWL_HTTP_DOCUMENTROOT: '/var/www'
       DWL_HTTP_SHIELD: 'false'
     tty: true
     hostname: localhost
@@ -22,9 +22,8 @@ services:
     networks:
       - dwlhost
     volumes:
-      - ./volumes/home/username:/home/username
-      - ./volumes/var/log/apache2:/var/log/apache2
-      - ./volumes/etc/apache2/sites-available:/etc/apache2/sites-available
+      - ./volumes/home/host:/dwl/home/host
+      - ./volumes/etc/apache2/sites-available:/dwl/etc/apache2/sites-available
 
 networks:
     dwlhost:

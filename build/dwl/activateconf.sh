@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 if [ ! -d /dwl/live ]; then
     sudo mkdir -p /dwl/live;

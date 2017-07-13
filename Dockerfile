@@ -51,7 +51,7 @@ CMD curl -f http://localhost/ || exit 1
 COPY ./build/dwl/var/www/html /dwl/var/www/html
 RUN rm -rdf /var/www/html && cp -rdf /dwl/var/www/html /var/www
 
-WORKDIR /var/www/html
+WORKDIR /var/www
 
 COPY ./build/dwl/vhost-env.sh \
 ./build/dwl/activateconf.sh \
@@ -60,7 +60,7 @@ COPY ./build/dwl/vhost-env.sh \
 ./build/dwl/init.sh \
 /dwl/
 
-CMD ["/bin/bash /dwl/init.sh && apachectl -k graceful && /bin/bash"]
+CMD ["/bin/bash /dwl/init.sh"]
 
 RUN chmod +x /dwl/init.sh && chown root:sudo -R /dwl
 USER admin
