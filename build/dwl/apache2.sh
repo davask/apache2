@@ -1,10 +1,12 @@
-#! /bin/bash
+#!/bin/bash
 
 if [ -d /home/${DWL_USER_NAME}/files ]; then
     sudo rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
     sudo ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
 else
-    sudo mkdir -p /home/${DWL_USER_NAME}/files;
+    if [ ! -d /home/${DWL_USER_NAME}/files ]; then
+        sudo mkdir -p /home/${DWL_USER_NAME}/files;
+    fi
     sudo rm -rdf ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
     sudo ln -sf /home/${DWL_USER_NAME}/files ${DWL_HTTP_DOCUMENTROOT:-/var/www/html};
 fi
@@ -24,11 +26,13 @@ if [ "$DWL_SHIELD_HTTP" == "true" ]; then
     fi
 fi
 
-for conf in `find /etc/apache2/sites-available -type f -name "*.conf"`; do
+for conf in `sudo find /etc/apache2/sites-available -type f -name "*.conf"`; do
 
     DWL_USER_DNS_CONF=${conf};
 
     DWL_USER_DNS_DATA=`echo ${DWL_USER_DNS_CONF} | awk -F '[/]' '{print $5}' | sed "s|\.conf||g"`;
+
+    echo "a2ensite ${DWL_USER_DNS_DATA}";
 
     sudo a2ensite ${DWL_USER_DNS_DATA};
 
