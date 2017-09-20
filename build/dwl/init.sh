@@ -23,5 +23,6 @@ echo ">> Virtualhost generic update";
 . ${dwlDir}/apache2.sh
 echo ">> Apache2 initialized";
 
+. ${dwlDir}/custom.sh
 
 tail -f /dev/null;
