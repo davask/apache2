@@ -13,7 +13,7 @@ services:
       DWL_USER_PASSWD: 'secret'
       DWL_USER_ID: '1000'
       DWL_SSH_ACCESS: 'false'
-      DWL_HTTP_SERVERADMIN: 'admin@localhost'
+      DWL_HTTP_SERVERADMIN: 'admin@davask.com'
       DWL_HTTP_DOCUMENTROOT: '/var/www'
       DWL_HTTP_SHIELD: 'false'
     tty: true

@@ -1,9 +1,9 @@
 [
   {
     "title": "Apache 2.4",
-    "description": "Apache 2.4 on d8.8",
+    "description": "Apache 2.4 on d9.0",
     "logo": "https://www.apache.org/images/feathertm.gif",
-    "image": "davask/d-apache:2.4-d8.8",
+    "image": "davask/d-apache:2.4-d9.0",
     "ports": [
         "22/tcp",
         "80/tcp"
