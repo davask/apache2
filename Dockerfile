@@ -1,7 +1,7 @@
-FROM davask/d-base:d8.8
-MAINTAINER davask <docker@davaskweblimited.com>
+FROM davask/d-base:d9.x
+MAINTAINER davask <admin@davask.com>
 USER root
-LABEL dwl.server.http="apache 2.4-d8.8"
+LABEL dwl.server.http="apache 2.4-d9.0"
 
 # Apache conf
 ENV APACHE_LOCK_DIR /var/lock/apache2
@@ -11,7 +11,7 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_RUN_DIR /var/run/apache2
 
-ENV DWL_HTTP_SERVERADMIN contact@davaskweblimited.com
+ENV DWL_HTTP_SERVERADMIN admin@davask.com
 ENV DWL_HTTP_DOCUMENTROOT /var/www/html
 ENV DWL_HTTP_SHIELD false
 
